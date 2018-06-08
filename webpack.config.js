@@ -15,12 +15,24 @@ const common = {
     output: {
       path: PATHS.build,
         filename: 'bundle.js'
+    },
+    module: {
+      rules: [
+          {
+              test: /\.css$/,
+              use: [
+                  { loader: 'style-loader'},
+                  { loader: 'css-loader'}
+              ]
+          }
+      ]
     }
 };
 
 // Default configuration
 if(TARGET === 'start' || !TARGET) {
     module.exports = merge(common, {
+        devtool: 'eval-source-map',
         devServer: {
             contentBase: PATHS.build,
             historyApiFallback: true,
